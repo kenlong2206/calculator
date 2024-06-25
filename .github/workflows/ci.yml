@@ -66,6 +66,15 @@ jobs:
         echo "Displaying environment variables:"
         env
 
+    - name: Check for src directory
+      run: |
+        if [ -d "src" ]; then
+          echo "src directory exists."
+          ls -R src
+        else
+          echo "src directory does not exist."
+        fi
+
     - name: Upload coverage to SonarCloud
       uses: SonarSource/sonarcloud-github-action@master
       env:
