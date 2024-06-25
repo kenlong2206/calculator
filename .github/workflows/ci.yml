@@ -38,20 +38,16 @@ jobs:
     - name: Set up PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
 
+    - name: Create directories
+      run: |
+        mkdir -p ./reports
+
     - name: Run tests with coverage
       run: |
         source venv/bin/activate
-        pytest --cov=src --cov-report=xml
+        python -m pytest
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: true
-
-    - name: SonarCloud Scan
+    - name: Upload coverage to SonarCloud
       uses: sonarsource/sonarcloud-github-action@v2
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -59,4 +55,4 @@ jobs:
         args: >
           -Dsonar.projectKey=<your_sonar_project_key>
           -Dsonar.organization=<your_sonar_organization>
-          -Dsonar.python.coverage.reportPaths=coverage.xml        
+          -Dsonar.python.coverage.reportPaths=coverage.xml 
