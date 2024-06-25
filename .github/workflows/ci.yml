@@ -54,10 +54,9 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=<kenlong2206_calculator>
-          -Dsonar.organization=<kenlong2206>
-          -Dsonar.python.coverage.reportPaths=coverage.xml 
           -Dsonar.host.url=https://sonarcloud.io 
           -Dsonar.python.version=3
-          -Dsonar.branch.name=${{ github.ref }}
+          -Dsonar.branch.name=${{ github.ref_name }}
           -Dsonar.sources=src/
+          -Dsonar.python.xunit.reportPath=reports/xunit-result.xml
+          -Dsonar.python.coverage.reportPaths=reports/coverage.xml
