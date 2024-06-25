@@ -75,6 +75,8 @@ jobs:
         args: >
           -Dsonar.projectKey=kenlong2206_calculator
           -Dsonar.organization=kenlong2206
+          -Dsonar.sources=src
+          -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
+          -Dsonar.exclusions=**/tests/**,**/__init__.py
           -Dsonar.python.version=3
           -Dsonar.branch.name=${{ github.ref_name }}
-          -Dsonar.exclusions=**/tests/**, **/__init__.py
