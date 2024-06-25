@@ -53,6 +53,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=<your_sonar_project_key>
-          -Dsonar.organization=<your_sonar_organization>
+          -Dsonar.projectKey=<kenlong2206_calculator>
+          -Dsonar.organization=<kenlong2206>
           -Dsonar.python.coverage.reportPaths=coverage.xml 
