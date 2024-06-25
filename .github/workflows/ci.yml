@@ -73,10 +73,11 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=kenlong2206_calculator
-          -Dsonar.organization=kenlong2206
-          -Dsonar.sources=src
-          -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
-          -Dsonar.exclusions=**/tests/**,**/__init__.py
+          -Dsonar.host.url=https://sonarcloud.io 
           -Dsonar.python.version=3
           -Dsonar.branch.name=${{ github.ref_name }}
+          -Dsonar.sources=src/
+          -Dsonar.python.xunit.reportPath=tests/test_reports/xunit-result.xml
+          -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
+          -Dsonar.exclusions=**/tests/**,**/__init__.py
+
