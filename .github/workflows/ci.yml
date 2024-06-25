@@ -41,7 +41,7 @@ jobs:
     - name: Create directories
       run: |
         mkdir -p tests/test_reports
-        ls -l
+        ls -l tests
 
     - name: Run tests with coverage
       run: |
