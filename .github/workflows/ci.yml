@@ -73,7 +73,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-            -Dsonar.projectKey=kenlong2206_calculator
-            -Dsonar.organization=kenlong2206
-            -Dsonar.python.version=3
-            -Dsonar.branch.name=${{ github.ref_name }}
+          -Dsonar.projectKey=kenlong2206_calculator
+          -Dsonar.organization=kenlong2206
+          -Dsonar.python.version=3
+          -Dsonar.branch.name=${{ github.ref_name }}
+          -Dsonar.exclusions=**/tests/**, **/__init__.py
