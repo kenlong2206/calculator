@@ -51,12 +51,20 @@ jobs:
 
     - name: List files for debugging
       run: |
-        echo "Listing files in the workspace:"
-        ls -R
         echo "Listing files in tests/test_reports:"
         ls -R tests/test_reports
         echo "Displaying the contents of coverage.xml:"
         cat tests/test_reports/coverage.xml
+
+    - name: Display Sonar properties
+      run: |
+        echo "Displaying Sonar properties:"
+        cat sonar-project.properties
+
+    - name: Display environment variables
+      run: |
+        echo "Displaying environment variables:"
+        env
 
     - name: Upload coverage to SonarCloud
       uses: sonarsource/sonarcloud-github-action@v2
