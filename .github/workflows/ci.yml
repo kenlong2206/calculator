@@ -40,7 +40,7 @@ jobs:
 
     - name: Create directories
       run: |
-        mkdir -p ./reports
+        mkdir -p tests/test_reports
 
     - name: Run tests with coverage
       run: |
@@ -58,5 +58,4 @@ jobs:
           -Dsonar.python.version=3
           -Dsonar.branch.name=${{ github.ref_name }}
           -Dsonar.sources=src/
-          -Dsonar.python.xunit.reportPath=reports/xunit-result.xml
-          -Dsonar.python.coverage.reportPaths=reports/coverage.xml
+          -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
