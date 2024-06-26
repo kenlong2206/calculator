@@ -90,5 +90,20 @@ jobs:
           -Dsonar.sources=src/
           -Dsonar.python.xunit.reportPath=tests/test_reports/xunit-result.xml
           -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
-#           -Dsonar.exclusions=**/tests/**,**/__init__.py
+          -Dsonar.exclusions=**/tests/**,**/__init__.py
+
+    - name: Build Docker image
+      run: docker build -t calculator-app .
+
+    - name: Tag Docker image
+      run: docker tag calculator-app:latest calculator-app:${{ github.sha }}
+
+    - name: Log into Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Push Docker image to Docker Hub
+      run: docker push calculator-app:${{ github.sha }}
 
