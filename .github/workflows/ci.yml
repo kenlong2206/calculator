@@ -100,7 +100,11 @@ jobs:
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_REF_NAME: ${{ github.ref }}
         GITHUB_RUN_NUMBER: ${{ github.run_number }}
-      run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:sha-${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:repo-${GITHUB_REPOSITORY} ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:$branch-${BRANCH_NAME} ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:run-${GITHUB_RUN_NUMBER}
+      run: |
+        docker tag ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:sha-${{ github.sha }} 
+        docker tag ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:repo-${GITHUB_REPOSITORY} 
+        docker tag ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:$branch-${BRANCH_NAME} 
+        docker tag ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:run-${GITHUB_RUN_NUMBER}
 
     - name: Log into Docker Hub
       uses: docker/login-action@v2
