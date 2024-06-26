@@ -96,7 +96,11 @@ jobs:
       run: docker build -t calculator-app .
 
     - name: Tag Docker image
-      run: docker tag calculator-app kenlongdocker/calculator-app:latest
+      env:
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_REF_NAME: ${{ github.ref }}
+        GITHUB_RUN_NUMBER: ${{ github.run_number }}
+      run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:sha-${{ github.sha }} ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:repo-${GITHUB_REPOSITORY} ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:$branch-${BRANCH_NAME} ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:run-${GITHUB_RUN_NUMBER}
 
     - name: Log into Docker Hub
       uses: docker/login-action@v2
@@ -105,5 +109,5 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Push Docker image to Docker Hub
-      run: docker push kenlongdocker/calculator-app:latest
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app
 
