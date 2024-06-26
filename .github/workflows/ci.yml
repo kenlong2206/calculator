@@ -93,7 +93,7 @@ jobs:
           -Dsonar.exclusions=**/tests/**,**/__init__.py
 
     - name: Build Docker image
-      run: docker build -t calculator-app .
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest .
 
     - name: Tag Docker image
       env:
