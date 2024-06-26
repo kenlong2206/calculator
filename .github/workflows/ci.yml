@@ -113,5 +113,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Push Docker image to Docker Hub
-      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:sha-${{ github.sha }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:branch-${{ github.ref_name }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:run-${{ github.run_number }}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
 
