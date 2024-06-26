@@ -9,11 +9,11 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire project into the container
-COPY . /app
+COPY . .
 
 # Define environment variable
 ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH=/app/src
+ENV PYTHONPATH=/app/src pytest tests/unit
 
 # Expose the port your app runs on (if applicable)
 EXPOSE 8000
