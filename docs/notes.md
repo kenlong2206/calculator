@@ -91,4 +91,6 @@ docker ps
 ```commandline
 docker kill <container id>
 ```
-
+- to run the docker container interactively
+```commandline
+docker run -it calculator-app /bin/sh

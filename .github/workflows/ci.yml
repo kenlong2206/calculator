@@ -40,10 +40,10 @@ jobs:
     - name: Set up PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
 
-    - name: Create directories
-      run: |
-        mkdir -p tests/test_reports
-        ls -l tests
+#    - name: Create directories
+#      run: |
+#        mkdir -p tests/test_reports
+#        ls -l tests
 
     - name: Run tests with coverage
       run: |
