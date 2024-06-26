@@ -13,6 +13,7 @@ COPY . /app
 
 # Define environment variable
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app/src
 
 # Expose the port your app runs on (if applicable)
 EXPOSE 8000
