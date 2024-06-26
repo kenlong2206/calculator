@@ -4,7 +4,7 @@ FROM python:3.12-alpine
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
+# Copy requirements file and install dependencies
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
