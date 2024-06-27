@@ -10,6 +10,7 @@ Markdown Guide: https://paperhive.org/help/markdown
 ## GIT Setup
 - `/.gitignore` file to tell git to ignore certain file types and not add them to git
 - gitflow branching model
+- 
 
 ## Code
 - all calculator code in `src/main.py`. a single class with 2 endpoints (`/` and `/calculate`)
@@ -84,13 +85,27 @@ docker pull kenlongdocker/calculator-app:latest
 - docker run -d -p 8000:8000 kenlongdocker/calculator-app:latest 
 ```
 - to view running docker containers
-```commandline
+```
 docker ps
 ```
 - to kill a docker container
-```commandline
+```
 docker kill <container id>
 ```
 - to run the docker container interactively
-```commandline
+```
 docker run -it calculator-app /bin/sh
+```
+## Docker Compose
+- included with Docker Desktop
+
+## JFrog Artifactory
+- login with github credentials
+
+## Selenium
+
+## Pact
+
+## Blazemeter
+
+## Infrastructure as Code

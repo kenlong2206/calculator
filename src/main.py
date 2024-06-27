@@ -6,11 +6,13 @@ from pydantic import BaseModel
 # Create FastAPI app
 app = FastAPI()
 
+
 # Define request body model
 class CalculationRequest(BaseModel):
     num1: float
     num2: float
     operation: str
+
 
 # Define routes
 @app.get("/")
@@ -38,6 +40,7 @@ def calculate(request: CalculationRequest):
         raise HTTPException(status_code=400, detail="Invalid operation. Supported operations: add, subtract, multiply, divide")
 
     return {"result": result}
+
 
 if __name__ == "__main__":
     import uvicorn
