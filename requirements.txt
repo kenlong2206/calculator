@@ -3,5 +3,4 @@ uvicorn
 pytest
 pydantic
 pytest-cov
-logging
 os
