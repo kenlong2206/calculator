@@ -44,7 +44,8 @@ jobs:
       run: |
         mkdir -p tests/test_reports
         mkdir -p logs
-        ls -l tests
+        touch logs/calculator_log.txt
+        ls -l 
 
     - name: Run tests with coverage
       run: |
