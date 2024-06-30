@@ -10,7 +10,7 @@ Markdown Guide: https://paperhive.org/help/markdown
 ## GIT Setup
 - `/.gitignore` file to tell git to ignore certain file types and not add them to git
 - gitflow branching model
-- 
+- setup authentication between local git anf github (use PAT)
 
 ## Code
 - all calculator code in `src/main.py`. a single class with 2 endpoints (`/` and `/calculate`)
@@ -21,6 +21,11 @@ Markdown Guide: https://paperhive.org/help/markdown
 - openAPI visible on `http://127.0.0.1:8000/docs`
 - to run curl from command line:
   - ```curl -Method POST -Uri http://127.0.0.1:8000/calculate -Headers @{'accept'='application/json'; 'Content-Type'='application/json'} -Body '{"num1": 5, "num2": 12, "operation": "multiply"}'```
+
+## Logging
+- logging setup code in `src/logging_setup.py`
+- logs written to `Calculator/logs`
+  - to write to logs use logger.info, .warn, .debug, .error, etc. e.g. `logger.info("Add operation")`
 
 ## Unit Testing
 - unit test files start with `test_<name of module being tested>` (pytest will search for these files)
