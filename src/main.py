@@ -31,7 +31,7 @@ def calculate(request: CalculationRequest):
     operation = request.operation.lower()
 
     if operation == "add":
-        logger..info("Add operation")
+        logger.info("Add operation")
         result = num1 + num2
     elif operation == "subtract":
         logger.info("Subtract operation")
