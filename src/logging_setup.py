@@ -3,7 +3,7 @@ import os
 
 # Configure the logger
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-LOG_FILE = os.path.join(PROJECT_ROOT, 'Calculator', 'logs', 'calculator_log.txt')
+LOG_FILE = os.path.join(PROJECT_ROOT, 'calculator', 'logs', 'calculator_log.txt')
 
 
 def setup_logging(file=LOG_FILE, level=logging.INFO):
