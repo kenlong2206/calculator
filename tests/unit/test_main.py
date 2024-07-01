@@ -3,9 +3,14 @@
 import pytest
 from fastapi.testclient import TestClient
 from src.main import app
+from src.logging_setup import setup_logging
 
 # Create a test client using FastAPI's TestClient
 client = TestClient(app)
+
+# Set up logging
+logger = setup_logging()
+
 
 def test_read_root():
     # Test the root endpoint '/'

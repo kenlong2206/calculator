@@ -121,4 +121,15 @@ jobs:
 #        docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:branch-${{ github.ref_name }}
 #        docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:run-${{ github.run_number }}
 
+    - name: Upload test files
+      uses: actions/upload-artifact@v2
+      with:
+        name: test_reports
+        path: ./logs/tests/test_reports
+
+    - name: Upload log file
+      uses: actions/upload-artifact@v2
+      with:
+        name: exchange_log.txt
+        path: ./logs
 
