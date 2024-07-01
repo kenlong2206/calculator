@@ -95,6 +95,18 @@ jobs:
           -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
           -Dsonar.exclusions=**/tests/**,**/__init__.py
 
+    - name: Upload test files
+      uses: actions/upload-artifact@v4
+      with:
+        name: test_reports
+        path: ./tests/test_reports
+
+    - name: Upload log file
+      uses: actions/upload-artifact@v4
+      with:
+        name: calculator_log.txt
+        path: ./logs
+
     - name: Build Docker image
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest .
 
@@ -107,17 +119,10 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
 
-    - name: Upload test files
-      uses: actions/upload-artifact@v4
-      with:
-        name: test_reports
-        path: ./tests/test_reports
-
-    - name: Upload log file
-      uses: actions/upload-artifact@v4
-      with:
-        name: calculator_log.txt
-        path: ./logs
+    - name: Pull Docker image to Docker Hub and run it
+      run: |
+      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
+      docker run -d -p 8000:8000 kenlongdocker/calculator-app:latest
 
     - name: Install Newman
       run: npm install -g newman
