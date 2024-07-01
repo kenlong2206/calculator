@@ -121,8 +121,8 @@ jobs:
 
     - name: Pull Docker image to Docker Hub and run it
       run: |
-      docker pull ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
-      docker run -d -p 8000:8000 kenlongdocker/calculator-app:latest
+        docker pull ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
+        docker run -d -p 8000:8000 kenlongdocker/calculator-app:latest
 
     - name: Install Newman
       run: npm install -g newman
