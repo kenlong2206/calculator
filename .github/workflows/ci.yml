@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout
       with:
         fetch-depth: 0  # Disable shallow clone
 
@@ -125,11 +125,11 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: test_reports
-        path: ./logs/tests/test_reports
+        path: .tests/test_reports
 
     - name: Upload log file
       uses: actions/upload-artifact@v2
       with:
-        name: exchange_log.txt
+        name: calculator_log.txt
         path: ./logs
 
