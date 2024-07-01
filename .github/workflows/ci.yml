@@ -123,7 +123,7 @@ jobs:
       run: |
         docker pull ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
         docker run -d -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
-        sleep 10
+        sleep 2000
         docker ps | grep calculator-app
         curl -s http://localhost:8000/
 
