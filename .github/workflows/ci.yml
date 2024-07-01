@@ -119,3 +119,8 @@ jobs:
         name: calculator_log.txt
         path: ./logs
 
+    - name: Install Newman
+      run: npm install -g newman
+
+    - name: Run Postman tests
+      run: newman run '.\tests\integration\Calculator Integration Tests.postman_collection.json'

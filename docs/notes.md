@@ -1,4 +1,12 @@
-Markdown Guide: https://paperhive.org/help/markdown
+
+## Links:
+- Markdown guide: https://paperhive.org/help/markdown
+- OpenAPI: http://127.0.0.1:8000/docs
+- github: https://github.com/kenlong2206/calculator
+- sonarcloud: https://sonarcloud.io/project/branches_list?id=kenlong2206_calculator
+- dockerhub: https://hub.docker.com/repository/docker/kenlongdocker/calculator-app/general
+- 
+
 
 ## Directory Structure
 - all code in `src` directory
@@ -66,6 +74,56 @@ Markdown Guide: https://paperhive.org/help/markdown
 
   > NOTE: SonarCloud would not pickup coverage reports so workaround was to add a `.coveragerc` file in project root
  
+## Integration Tests - Postman
+- To use postman and integrate into the pipeline:
+  - create a postman collection containing API requests and tests
+  - export the postman collection and environment as JSON files
+  - use 'Newman' to run postman tests (Newman is a command-line collection runner for Postman allowing postman tests to be run from the command line)
+  - Integrate Newman into the CI pipeline
+- To create a postman collection:
+  - Click to create new collection
+  - in main section enter URL endpoint and select method: GET, POST, etc
+  - In headers, ensure 'Content-type' is 'application/json'
+  - In `Body -> Raw` enter the JSON string to be posted
+  - In `Scripts -> Post-res` enter the tests:
+    - To check the return status:
+      ```
+      pm.test("Returns 200 OK status", () => {
+      pm.response.to.have.status(200)
+      });
+      ```
+    - To check the response time:
+      ```
+      pm.test("Response time is less than 500ms", function () {
+      pm.expect(pm.response.responseTime).to.be.below(500);
+      });
+      ```
+    - To check the content type:
+      ```
+      pm.test("Content-Type is application/json", function () {
+      pm.response.to.have.header("Content-Type", "application/json");
+      });    
+      ```
+    - To check the returned result:
+      ```
+      pm.test("Response body contains the correct result", function () {
+      var jsonData = pm.response.json();
+      pm.expect(jsonData).to.have.property('result', 3);
+      });    
+      ```
+    - To check the returned message:
+      ```
+      pm.test("Response body contains the correct result", function () {
+      var jsonData = pm.response.json();
+      pm.expect(jsonData).to.have.property('detail', 'Division by zero is not allowed');
+      });    
+      ```
+- Export the postman collection json to directory `tests/integration/`
+- install newman: `npm install -g newman`
+
+
+
+
 ## Docker 
 - install docker desktop so the docker CLI is installed
 - check it works by typing `docker` from terminal/cmd
@@ -103,6 +161,8 @@ docker run -it calculator-app /bin/sh
 ```
 ## Docker Compose
 - included with Docker Desktop
+
+
 
 ## JFrog Artifactory
 - login with github credentials
