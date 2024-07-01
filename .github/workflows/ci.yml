@@ -119,13 +119,15 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
 
-    - name: Pull Docker image to Docker Hub and run it
+    - name: Pull Docker image to Docker Hub, run it and verify it is running correctly
       run: |
         docker pull ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
         docker run -d -p 8000:8000 kenlongdocker/calculator-app:latest
+        sleep 2
+        docker ps | grep calculator-app
 
     - name: Install Newman
       run: npm install -g newman
 
-    - name: Run Postman tests
+    - name: Run Postman tests against docker container
       run: newman run './tests/integration/calculator_integration_tests.postman_collection.json'
