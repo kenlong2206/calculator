@@ -110,7 +110,7 @@ jobs:
 #        docker tag ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:run-${{ github.run_number }}
 
     - name: Log into Docker Hub
-      uses: docker/login-action@v4
+      uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
