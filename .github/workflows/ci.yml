@@ -125,6 +125,7 @@ jobs:
         docker run -d -p 8000:8000 kenlongdocker/calculator-app:latest
         sleep 2
         docker ps | grep calculator-app
+        curl -s http://localhost:8000/
 
     - name: Install Newman
       run: npm install -g newman
