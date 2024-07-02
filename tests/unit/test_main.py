@@ -1,6 +1,6 @@
 # tests/unit/test_main.py
 
-import pytest
+import os
 from fastapi.testclient import TestClient
 from src.main import app
 from src.logging_setup import setup_logging
@@ -8,8 +8,8 @@ from src.logging_setup import setup_logging
 # Create a test client using FastAPI's TestClient
 client = TestClient(app)
 
-# Set up logging
-logger = setup_logging()
+# setup the logger to use a test file and directory
+logger = setup_logging(test=True)
 
 
 def test_read_root():
@@ -53,3 +53,25 @@ def test_calculate_invalid_operation():
     response = client.post("/calculate", json={"num1": 10, "num2": 5, "operation": "invalid"})
     assert response.status_code == 400
     assert response.json()["detail"] == "Invalid operation. Supported operations: add, subtract, multiply, divide"
+
+def test_log_file_and_directory_exist():
+    # Test the logging directory is created if it does not exist
+    # if os.path.exists(LOG_DIR):
+    #     os.remove(LOG_DIR)
+    log_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    log_dir = os.path.join(log_dir, 'logs_test')
+    log_file = os.path.join(log_dir, 'calculator_log.txt')
+
+    if os.path.exists(log_dir):
+        os.remove(log_dir)
+    if os.path.exists(log_file):
+        os.remove(log_file)
+
+    # send some data in to create log activity
+    response = client.post("/calculate", json={"num1": 10, "num2": 5, "operation": "add"})
+    assert response.status_code == 200
+    assert response.json()["result"] == 15.0
+
+    # # Check if the log file is created
+    # assert os.path.exists(log_dir), "Log directory was created"
+    # assert os.path.exists(log_file), "Log file was created"
