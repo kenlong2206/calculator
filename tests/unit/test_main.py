@@ -62,10 +62,10 @@ def test_log_file_and_directory_exist():
     log_dir = os.path.join(log_dir, 'logs')
     log_file = os.path.join(log_dir, 'calculator_test_log.txt')
 
-    if os.path.exists(log_dir):
-        os.remove(log_dir)
-    if os.path.exists(log_file):
-        os.remove(log_file)
+    # if os.path.exists(log_dir):
+    #     os.remove(log_dir)
+    # if os.path.exists(log_file):
+    #     os.remove(log_file)
 
     # send some data in to create log activity
     response = client.post("/calculate", json={"num1": 10, "num2": 5, "operation": "add"})
