@@ -8,11 +8,10 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 def setup_logging(level=logging.INFO, test=False):
 
+    log_dir = os.path.join(PROJECT_ROOT, 'logs')
     if test:
-        log_dir = os.path.join(PROJECT_ROOT, 'logs_test')
-        file = os.path.join(log_dir, 'calculator_log.txt')
+        file = os.path.join(log_dir, 'calculator_test_log.txt')
     else:
-        log_dir = os.path.join(PROJECT_ROOT, 'logs')
         file = os.path.join(log_dir, 'calculator_log.txt')
 
     # Ensure the log directory  and file exist

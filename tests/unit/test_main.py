@@ -58,9 +58,9 @@ def test_log_file_and_directory_exist():
     # Test the logging directory is created if it does not exist
     # if os.path.exists(LOG_DIR):
     #     os.remove(LOG_DIR)
-    log_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    log_dir = os.path.join(log_dir, 'logs_test')
-    log_file = os.path.join(log_dir, 'calculator_log.txt')
+    log_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    log_dir = os.path.join(log_dir, 'logs')
+    log_file = os.path.join(log_dir, 'calculator_test_log.txt')
 
     if os.path.exists(log_dir):
         os.remove(log_dir)
