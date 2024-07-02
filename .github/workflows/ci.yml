@@ -127,6 +127,9 @@ jobs:
         docker ps | grep calculator-app
         curl -s http://localhost:8000/
 
+    - name: Check Docker container logs
+      run: docker logs ${{ secrets.DOCKERHUB_USERNAME }}calculator-app
+
     - name: Install Newman
       run: npm install -g newman
 
