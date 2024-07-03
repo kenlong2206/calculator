@@ -113,10 +113,13 @@ jobs:
         docker run -d -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
 
     - name: Install Newman
-      run: npm install -g newman
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-html
 
     - name: Run Postman tests against docker container
-      run: newman run './tests/integration/calculator_integration_tests.postman_collection.json' --reporters json --reporter-json-export './test_reports/calculator_integration_tests_report.json'
+      run: newman run './tests/integration/calculator_integration_tests.postman_collection.json' --reporters html --reporter-html-export './tests/test_reports/calculator_integration_tests_report.html'
+
 
     - name: Upload test reports
       uses: actions/upload-artifact@v4
