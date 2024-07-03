@@ -16,7 +16,7 @@ on:
 
 jobs:
   test:
-
+# *************************************** ENVIRONMENT SETUP ***************************************
     runs-on: ubuntu-latest
 
     steps:
@@ -44,42 +44,15 @@ jobs:
       run: |
         mkdir -p tests/test_reports
         mkdir -p logs
-        touch logs/calculator_log.txt
-        pwd
-        ls -l 
 
+# *************************************** UNIT TESTING ***************************************
     - name: Run tests with coverage
       run: |
         source venv/bin/activate
         python -m pytest
         ls -l tests/test_reports
 
-    - name: List files for debugging
-      run: |
-        echo "Listing files in tests/test_reports:"
-        ls -R tests/test_reports
-        echo "Displaying the contents of coverage.xml:"
-        cat tests/test_reports/coverage.xml
-
-    - name: Display Sonar properties
-      run: |
-        echo "Displaying Sonar properties:"
-        cat sonar-project.properties
-
-    - name: Display environment variables
-      run: |
-        echo "Displaying environment variables:"
-        env
-
-    - name: Check for src directory
-      run: |
-        if [ -d "src" ]; then
-          echo "src directory exists."
-          ls -R src
-        else
-          echo "src directory does not exist."
-        fi
-
+# *************************************** STATIC SCANNING ***************************************
     - name: Upload coverage to SonarCloud
       uses: SonarSource/sonarcloud-github-action@master
       env:
@@ -95,6 +68,7 @@ jobs:
           -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
           -Dsonar.exclusions=**/tests/**,**/__init__.py
 
+# ************************************* CONTAINERISE ***************************************
     - name: Build Docker image
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest .
 
@@ -107,11 +81,12 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
 
-    - name: Pull Docker image to Docker Hub, run it and verify it is running correctly
+    - name: Pull Docker image from Docker Hub, run it and verify it is running correctly
       run: |
         docker pull ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
         docker run -d -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest
 
+# *************************************** INTEGRATION TESTING ***************************************
     - name: Install Newman
       run: |
         npm install -g newman
@@ -120,7 +95,7 @@ jobs:
     - name: Run Postman tests against docker container
       run: newman run './tests/integration/calculator_integration_tests.postman_collection.json' --reporters html --reporter-html-export './tests/test_reports/calculator_integration_tests_report.html'
 
-
+# *************************************** UPLOAD ARTIFACTS ***************************************
     - name: Upload test reports
       uses: actions/upload-artifact@v4
       with:
