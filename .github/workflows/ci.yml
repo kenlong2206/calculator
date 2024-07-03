@@ -95,18 +95,6 @@ jobs:
           -Dsonar.python.coverage.reportPaths=tests/test_reports/coverage.xml
           -Dsonar.exclusions=**/tests/**,**/__init__.py
 
-    - name: Upload test files
-      uses: actions/upload-artifact@v4
-      with:
-        name: test_reports
-        path: ./tests/test_reports
-
-    - name: Upload log file
-      uses: actions/upload-artifact@v4
-      with:
-        name: calculator_log.txt
-        path: ./logs
-
     - name: Build Docker image
       run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/calculator-app:latest .
 
@@ -130,3 +118,14 @@ jobs:
     - name: Run Postman tests against docker container
       run: newman run './tests/integration/calculator_integration_tests.postman_collection.json' --reporters json --reporter-json-export './test_reports/calculator_integration_tests_report.json'
 
+    - name: Upload test reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: test_reports
+        path: ./tests/test_reports
+
+    - name: Upload log file
+      uses: actions/upload-artifact@v4
+      with:
+        name: calculator_log.txt
+        path: ./logs
