@@ -128,4 +128,5 @@ jobs:
       run: npm install -g newman
 
     - name: Run Postman tests against docker container
-      run: newman run './tests/integration/calculator_integration_tests.postman_collection.json'
+      run: newman run './tests/integration/calculator_integration_tests.postman_collection.json' --reporters json --reporter-json-export './test_reports/calculator_integration_tests_report.json'
+
