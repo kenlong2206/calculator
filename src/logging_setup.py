@@ -14,10 +14,7 @@ def setup_logging(level=logging.INFO, test=False):
     else:
         file = os.path.join(log_dir, 'calculator_log.txt')
 
-    # Ensure the log directory  and file exist
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-        print(f"Created directory: {log_dir}")
+    # Ensure the log file exists
     if not os.path.exists(file):
         open(file, 'w').close()  # Create an empty file if it doesn't exist
         print(f"Created file: {file}")
